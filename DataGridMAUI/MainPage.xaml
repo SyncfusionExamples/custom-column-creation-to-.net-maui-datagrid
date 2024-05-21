@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid"
+             xmlns:local="clr-namespace:DataGridMAUI"
+             x:Class="DataGridMAUI.MainPage">
+    <ContentPage.BindingContext>
+        <local:OrderInfoRepository  x:Name="viewModel"/>
+    </ContentPage.BindingContext>
+
+    <syncfusion:SfDataGrid x:Name="dataGrid"
+                                Margin="20"
+                                VerticalOptions="FillAndExpand"
+                                ItemsSource="{Binding OrderInfoCollection}"
+                                GridLinesVisibility="Both"
+                                HeaderGridLinesVisibility="Both"
+                                AutoGenerateColumnsMode="None"
+                                AllowEditing="True"
+                                SelectionMode="Single"
+                                ColumnWidthMode="Auto">
+        <syncfusion:SfDataGrid.Columns>
+            <syncfusion:DataGridNumericColumn Format="D"
+                                                    HeaderText="Order ID"
+                                                    MappingName="OrderID">
+            </syncfusion:DataGridNumericColumn>
+            <syncfusion:DataGridTextColumn HeaderText="Customer ID"
+                                                MappingName="CustomerID">
+            </syncfusion:DataGridTextColumn>
+            <syncfusion:DataGridTextColumn MappingName="Customer"
+                                                HeaderText="Customer">
+            </syncfusion:DataGridTextColumn>
+            <syncfusion:DataGridTextColumn HeaderText="Ship City"
+                                                MappingName="ShipCity">
+            </syncfusion:DataGridTextColumn>
+            <local:DataGridPickerColumn HeaderText="Ship Country"
+                                        MappingName="ShipCountry"                                                                                
+                                        DataGrid="{x:Reference dataGrid}"
+                                        BindingContext="{x:Reference viewModel}"
+                                        ItemsSource="{Binding CountryList}"
+                                        />          
+        </syncfusion:SfDataGrid.Columns>
+    </syncfusion:SfDataGrid>
+</ContentPage>
